@@ -1,38 +1,170 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+ <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ===== SEO (aligné à l'index) ===== -->
-  <title>Salle de sport à Tarbes — La salle & équipements | ATP Tarbes</title>
-  <meta name="description" content="Visitez la salle ATP Tarbes : équipements barbell, cardio, HIIT/HEAT, pistes de sprint, vestiaires. Accès facile, parking gratuit, PMR. Essai offert." />
-  <link rel="canonical" href="https://atptarbes.fr/salle.html" /> <!-- TODO: domaine réel -->
-  <meta name="robots" content="index,follow" />
+  <!-- ═══════════════════════════════════════════════════════════
+       SEO — PAGE SALLE  ·  ATP Tarbes
+       Dernière mise à jour : avril 2026
+       ═══════════════════════════════════════════════════════════ -->
+
+  <title>La salle – Équipements musculation & CrossFit à Tarbes | ATP Tarbes</title>
+
+  <meta name="description"
+        content="Découvrez la salle ATP Tarbes : équipements musculation, barbell, cardio, piste de sprint, espace CrossFit et HIIT. Accès PMR, parking gratuit, vestiaires. 1 rue Youri Gagarine, 65000 Tarbes. Essai offert." />
+
+  <link rel="canonical" href="https://atptarbes.fr/salle.html" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#1D4935" />
 
-  <!-- Open Graph / Twitter -->
+  <!-- Géo-ciblage local -->
+  <meta name="geo.region" content="FR-65" />
+  <meta name="geo.placename" content="Tarbes" />
+  <meta name="geo.position" content="43.2270;0.0757" />
+  <meta name="ICBM" content="43.2270, 0.0757" />
+
+  <!-- Keywords : salle/équipements + activités GSC + zone -->
+  <meta name="keywords"
+        content="atp tarbes, atp training, atp sport, atp performance,
+                 salle de sport tarbes, salle sport tarbes, tarbes salle de sport,
+                 salle de musculation tarbes, salle muscu tarbes, salle musculation tarbes,
+                 salle de fitness tarbes, salle de gym tarbes, tarbes fitness club,
+                 équipement musculation tarbes, équipement crossfit tarbes,
+                 salle crossfit tarbes, box crossfit tarbes,
+                 salle hiit tarbes, salle cardio tarbes,
+                 barbell tarbes, haltérophilie tarbes,
+                 piste sprint intérieur, espace fonctionnel,
+                 salle de sport parking gratuit, salle de sport PMR, salle de sport accessible,
+                 musculation tarbes, fitness tarbes,
+                 sport tarbes, tarbes sport,
+                 gym near me, best gyms nearby,
+                 athletic training performance, atp performance,
+                 salle de sport hautes-pyrénées, salle de sport 65,
+                 tarbes, hautes-pyrénées, 65000, occitanie, pau, lourdes, auch" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       OPEN GRAPH
+       ═══════════════════════════════════════════════════════════ -->
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
   <meta property="og:site_name" content="ATP Tarbes" />
-  <meta property="og:title" content="La salle — ATP Tarbes" />
-  <meta property="og:description" content="Salle de sport à Tarbes : équipements complets, accès PMR, parking gratuit. oaching intelligent, préparation physique, accès libre, HIIT, cardio, haltérophilie, force, accès libre, fitness, santé, running, gainage." />
+  <meta property="og:title" content="La salle – Équipements musculation & CrossFit à Tarbes | ATP Tarbes" />
+  <meta property="og:description" content="Salle de sport à Tarbes : équipements complets musculation, CrossFit, cardio, piste de sprint. Accès PMR, parking gratuit. Essai offert !" />
   <meta property="og:url" content="https://atptarbes.fr/salle.html" />
   <meta property="og:image" content="https://atptarbes.fr/atp/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="ATP Tarbes – salle de sport et équipements à Tarbes" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TWITTER CARD
+       ═══════════════════════════════════════════════════════════ -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="La salle – Équipements musculation & CrossFit à Tarbes | ATP Tarbes" />
+  <meta name="twitter:description" content="Musculation, CrossFit, cardio, piste de sprint. Parking gratuit, accès PMR. Essai offert à Tarbes !" />
+  <meta name="twitter:image" content="https://atptarbes.fr/atp/og-cover.jpg" />
+  <meta name="twitter:image:alt" content="ATP Tarbes – salle de sport et équipements à Tarbes" />
 
-  <!-- Fonts (Poppins / Manrope comme l'index) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;700&display=swap"></noscript>
+  <!-- ═══════════════════════════════════════════════════════════
+       TECHNIQUE  (fonts · favicons · manifest)
+       ═══════════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;700&display=swap" /></noscript>
 
-  <!-- Favicon / PWA -->
-<link rel="icon" type="image/png" sizes="32x32" href="/logo-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/logo-16.png">
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#1D4935">
+  <!-- Favicon / PWA (inchangé) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/logo-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/logo-16.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#1D4935" />
+
+  <!-- Sitemap -->
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       DONNÉES STRUCTURÉES  (Schema.org – JSON-LD)
+       Page Salle → SportsActivityLocation + amenityFeature
+       ═══════════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "ATP Tarbes",
+    "alternateName": ["ATP Training", "ATP Sport", "ATP CrossFit", "Athletic Training Performance", "ATP Performance"],
+    "url": "https://atptarbes.fr/",
+    "logo": "https://atptarbes.fr/atp/og-cover.jpg",
+    "image": "https://atptarbes.fr/atp/og-cover.jpg",
+    "description": "Salle de sport ATP Tarbes : équipements musculation, barbell, cardio, espace CrossFit, piste de sprint, HIIT. Accès PMR, parking gratuit, vestiaires.",
+    "telephone": "+33687576869",
+    "email": "atppreparationphysique@gmail.com",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1 Rue Youri Gagarine",
+      "postalCode": "65000",
+      "addressLocality": "Tarbes",
+      "addressRegion": "Occitanie",
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 43.2270,
+      "longitude": 0.0757
+    },
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Espace musculation", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Espace CrossFit", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Équipements cardio", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Barbell / Haltérophilie", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Piste de sprint intérieure", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Espace HIIT / fonctionnel", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Vestiaires", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Parking gratuit", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Accès PMR", "value": true }
+    ],
+    "areaServed": [
+      { "@type": "City", "name": "Tarbes" },
+      { "@type": "City", "name": "Lourdes" },
+      { "@type": "City", "name": "Pau" },
+      { "@type": "City", "name": "Auch" },
+      { "@type": "City", "name": "Bagnères-de-Bigorre" },
+      { "@type": "AdministrativeArea", "name": "Hautes-Pyrénées" },
+      { "@type": "AdministrativeArea", "name": "Pyrénées-Atlantiques" },
+      { "@type": "AdministrativeArea", "name": "Haute-Garonne" },
+      { "@type": "AdministrativeArea", "name": "Occitanie" }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/atpprepaphysique/",
+      "https://www.facebook.com/profile.php?id=100089940827994"
+    ]
+  }
+  </script>
+
+  <!-- Fil d'Ariane -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Accueil",
+        "item": "https://atptarbes.fr/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "La salle",
+        "item": "https://atptarbes.fr/salle.html"
+      }
+    ]
+  }
+  </script>
 
   <style>
     :root{
