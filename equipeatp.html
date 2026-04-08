@@ -1,38 +1,151 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+ <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ===== SEO aligné à l'index ===== -->
-  <title>Équipe ATP — Coaches & préparation physique à Tarbes | ATP Tarbes</title>
-  <meta name="description" content="Découvrez l’équipe ATP : Mathieu et Louis, coaches diplômés (Master STAPS). Préparation physique, haltérophilie et entraînement fonctionnel à Tarbes." />
-  <link rel="canonical" href="https://atptarbes.fr/equipeatp.html" /> <!-- TODO -->
-  <meta name="robots" content="index,follow" />
+  <!-- ═══════════════════════════════════════════════════════════
+       SEO — PAGE ÉQUIPE  ·  ATP Tarbes
+       Dernière mise à jour : avril 2026
+       ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Title : coach sportif tarbes = requête GSC à capter (~60 car.) -->
+  <title>Notre équipe – Coaches sportifs diplômés à Tarbes | ATP Tarbes</title>
+
+  <!-- Meta description : ~155 car., noms + diplômes + spécialités + local -->
+  <meta name="description"
+        content="Rencontrez l'équipe ATP Tarbes : Mathieu et Louis, coaches diplômés (Master STAPS). Préparation physique, CrossFit, haltérophilie, Pilates et coaching personnalisé à Tarbes. Essai offert." />
+
+  <link rel="canonical" href="https://atptarbes.fr/equipeatp.html" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#1D4935" />
 
-  <!-- Open Graph / Twitter (mêmes conventions que l'index) -->
+  <!-- Géo-ciblage local -->
+  <meta name="geo.region" content="FR-65" />
+  <meta name="geo.placename" content="Tarbes" />
+  <meta name="geo.position" content="43.2270;0.0757" />
+  <meta name="ICBM" content="43.2270, 0.0757" />
+
+  <!-- Keywords : requêtes GSC coach/équipe + activités + zone élargie -->
+  <meta name="keywords"
+        content="atp tarbes, atp training, atp coaching, atp class,
+                 coach sportif tarbes, coaching sportif tarbes, coaching personnalisé tarbes,
+                 coach musculation tarbes, coach crossfit tarbes,
+                 préparateur physique tarbes, preparation physique tarbes,
+                 coach diplômé tarbes, coach staps, master staps,
+                 entraîneur personnel tarbes, personal trainer tarbes,
+                 coach haltérophilie tarbes, coach pilates tarbes,
+                 coach hiit tarbes, coach fitness tarbes,
+                 entraînement fonctionnel tarbes, fitness fonctionnel tarbes,
+                 salle de sport tarbes, salle de musculation tarbes,
+                 crossfit tarbes, salle de fitness tarbes,
+                 sport tarbes, tarbes sport,
+                 athletic training performance, athletic performance training,
+                 tarbes, hautes-pyrénées, 65000, occitanie, pau, lourdes, auch" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       OPEN GRAPH  (Facebook · LinkedIn · WhatsApp…)
+       ═══════════════════════════════════════════════════════════ -->
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
   <meta property="og:site_name" content="ATP Tarbes" />
-  <meta property="og:title" content="Équipe ATP — Coaches & préparation physique à Tarbes" />
-  <meta property="og:description" content="Mathieu & Louis, coaches diplômés (Master STAPS). Préparation physique, haltérophilie, entraînement fonctionnel." />
-  <meta property="og:url" content="https://atptarbes.fr/equipeatp.html" /> <!-- TODO -->
-  <meta property="og:image" content="https://atptarbes.fr/atp/og-cover.jpg" /> <!-- TODO -->
+  <meta property="og:title" content="Notre équipe – Coaches sportifs diplômés à Tarbes | ATP Tarbes" />
+  <meta property="og:description" content="Mathieu & Louis, coaches diplômés Master STAPS. Préparation physique, CrossFit, haltérophilie et coaching personnalisé à Tarbes." />
+  <meta property="og:url" content="https://atptarbes.fr/equipeatp.html" />
+  <meta property="og:image" content="https://atptarbes.fr/atp/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="ATP Tarbes – Mathieu et Louis, coaches sportifs diplômés" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TWITTER CARD
+       ═══════════════════════════════════════════════════════════ -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Notre équipe – Coaches sportifs diplômés à Tarbes | ATP Tarbes" />
+  <meta name="twitter:description" content="Mathieu & Louis, coaches diplômés Master STAPS. Préparation physique, CrossFit et coaching personnalisé à Tarbes." />
+  <meta name="twitter:image" content="https://atptarbes.fr/atp/og-cover.jpg" />
+  <meta name="twitter:image:alt" content="ATP Tarbes – Mathieu et Louis, coaches sportifs diplômés" />
 
-  <!-- ===== Google Fonts (identiques à l’index) ===== -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;700&display=swap"></noscript>
+  <!-- ═══════════════════════════════════════════════════════════
+       TECHNIQUE  (fonts · favicons · manifest)
+       ═══════════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;700&display=swap" /></noscript>
 
-  <!-- Favicon / PWA -->
-<link rel="icon" type="image/png" sizes="32x32" href="/logo-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/logo-16.png">
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#1D4935">
+  <!-- Favicon / PWA (inchangé) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/logo-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/logo-16.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#1D4935" />
+
+  <!-- Sitemap -->
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       DONNÉES STRUCTURÉES  (Schema.org – JSON-LD)
+       Page Équipe → SportsTeam + Person pour chaque coach
+       ═══════════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsTeam",
+    "name": "Équipe ATP Tarbes",
+    "url": "https://atptarbes.fr/equipeatp.html",
+    "parentOrganization": {
+      "@type": "SportsActivityLocation",
+      "name": "ATP Tarbes",
+      "url": "https://atptarbes.fr/"
+    },
+    "member": [
+      {
+        "@type": "Person",
+        "name": "Mathieu",
+        "jobTitle": "Coach sportif diplômé – Master STAPS",
+        "description": "Coach diplômé en préparation physique, haltérophilie et entraînement fonctionnel à Tarbes",
+        "worksFor": {
+          "@type": "SportsActivityLocation",
+          "name": "ATP Tarbes"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Louis",
+        "jobTitle": "Coach sportif diplômé – Master STAPS",
+        "description": "Coach diplômé en préparation physique, CrossFit et coaching personnalisé à Tarbes",
+        "worksFor": {
+          "@type": "SportsActivityLocation",
+          "name": "ATP Tarbes"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fil d'Ariane -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Accueil",
+        "item": "https://atptarbes.fr/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Équipe",
+        "item": "https://atptarbes.fr/equipeatp.html"
+      }
+    ]
+  }
+  </script>
   
   <style>
     :root{
