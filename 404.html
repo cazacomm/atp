@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Redirection…</title>
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="/" />
+  <!-- filet de sécurité si JS désactivé -->
+  <noscript><meta http-equiv="refresh" content="0; url=/" /></noscript>
+</head>
+<body>
+  <p>Redirection… Si rien ne se passe, <a href="/">cliquez ici</a>.</p>
+  <script>
+    /* Routes à rediriger -> cible */
+    const routes = {
+      "/mentions-legales": "/",
+      "/politique-de-confidentialite": "/",
+      "/video-portes-ouvertes": "/"
+      // ajoute ici d'autres anciennes URLs si besoin
+    };
+
+    // Normalise le chemin reçu (/truc/, /truc/index.html, encodage, etc.)
+    const path = decodeURI(location.pathname)
+      .replace(/\/index\.html$/i, "")
+      .replace(/\/+$/,"");
+
+    const target = routes[path] || "/";
+
+    // remplace l'entrée d'historique (évite la boucle en arrière)
+    location.replace(target + location.search + location.hash);
+  </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Exclure les fichiers techniques
+Disallow: /404.html
+
+Sitemap: https://atptarbes.fr/sitemap.xml

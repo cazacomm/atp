@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ===== SEO aligné au site ===== -->
+  <title>Mentions légales — ATP Tarbes</title>
+  <meta name="description" content="Mentions légales du site ATP Tarbes : éditeur, hébergeur, propriété intellectuelle, données personnelles (RGPD), cookies, médiation et contact." />
+  <link rel="canonical" href="https://atptarbes.fr/mentions.html" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#1D4935" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ATP Tarbes" />
+  <meta property="og:title" content="Mentions légales — ATP Tarbes" />
+  <meta property="og:description" content="Éditeur du site, hébergeur, données personnelles et RGPD, cookies, propriété intellectuelle, responsabilité, médiation et contact." />
+  <meta property="og:url" content="https://atptarbes.fr/mentions.html" />
+  <meta property="og:image" content="https://atptarbes.fr/atp/og-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts (identiques à l'index) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Manrope:wght@400;500;700&display=swap"></noscript>
+
+  <style>
+    :root{
+      --brand:#1D4935; --bg:#ffffff; --text:#111; --accent:var(--brand);
+      --font-display:'Poppins','Montserrat',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+      --font-text:'Manrope',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+      --header-h: 86px;  --logo-h: 60px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-text);overflow-x:hidden;font-weight:400;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+
+    /* Header (identique) */
+    .site-header{position:fixed;inset:0 0 auto 0;height:var(--header-h);background:var(--brand);z-index:50}
+    .site-header .wrap{width:min(1200px,96%);margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .brand{display:block}
+    .brand-logo{height:var(--logo-h);display:block}
+    .desktop-nav{display:none;gap:8px}
+    .desktop-nav a{color:#fff;text-decoration:none;font-weight:800;padding:10px 16px;border-radius:999px;font-size:18px;text-transform:uppercase;letter-spacing:.04em}
+    .desktop-nav a:hover{background:rgba(255,255,255,.12)}
+    .desktop-nav a.active{background:rgba(255,255,255,.18)}
+    .burger{position:relative;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:2px solid rgba(255,255,255,.55);border-radius:12px;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+    .burger .bar{position:relative;display:block;width:24px;height:3px;background:#fff;border-radius:2px}
+    .burger .bar::before,.burger .bar::after{content:"";position:absolute;left:50%;top:50%;width:24px;height:3px;background:#fff;border-radius:2px;transform:translate(-50%,-50%)}
+    .burger .bar::before{transform:translate(-50%,-50%) translateY(-7px)}
+    .burger .bar::after{transform:translate(-50%,-50%) translateY(7px)}
+    body.menu-open .burger .bar{background:transparent}
+    body.menu-open .burger .bar::before{transform:translate(-50%,-50%) rotate(45deg)}
+    body.menu-open .burger .bar::after{transform:translate(-50%,-50%) rotate(-45deg)}
+    .burger:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+    .mobile-menu{position:fixed;top:0;right:0;bottom:0;width:84%;max-width:320px;background:var(--brand);box-shadow:-16px 0 40px rgba(0,0,0,.18);padding:20px;transform:translateX(100%);transition:transform .28s ease;z-index:60;display:flex;flex-direction:column;gap:8px}
+    .mobile-menu a{padding:14px 8px;border-radius:10px;text-decoration:none;color:#fff;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+    .mobile-menu a:hover{background:rgba(255,255,255,.12)}
+    .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .28s ease;z-index:55}
+    body.menu-open .mobile-menu{transform:translateX(0)}
+    body.menu-open .backdrop{opacity:1;pointer-events:auto}
+    body.menu-open{overflow:hidden}
+
+    @media (min-width:900px){
+      :root{ --header-h: 120px; --logo-h: 84px; }
+      .desktop-nav{display:flex}
+      .burger{display:none}
+      .mobile-menu,.backdrop{display:none}
+    }
+    @media (min-width:1400px){ :root{ --header-h: 128px; --logo-h: 92px; } }
+
+    /* Typo & sections */
+    h1,h2,h3{font-family:var(--font-display)}
+    h1{font-weight:900}
+    h2{font-weight:900}
+    h3{font-weight:700}
+    strong{font-weight:700;text-decoration:underline;text-underline-offset:2px}
+    em{font-style:italic}
+
+    main{display:block;padding-top:var(--header-h)}
+    .section{padding:20px 16px}
+    .section .wrap{width:min(1000px,96%);margin:0 auto}
+    .section h2{margin:0 0 10px;font-size:32px;color:var(--brand);text-align:center}
+
+    .legal{display:grid;gap:18px}
+    .legal h3{font-size:22px;color:var(--brand);margin:0 0 6px}
+    .legal p{margin:0;font-size:17px;line-height:1.75;text-align:justify}
+    .legal ul{margin:8px 0 0;padding-left:20px}
+
+    /* Hero simple (même hauteur que les autres pages) */
+    .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;background:
+      linear-gradient(transparent 55%, rgba(0,0,0,.35) 100%),
+      url('atp/mentions.jpg') center/cover no-repeat}
+    .hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.5);pointer-events:none;z-index:0}
+    .hero>*{position:relative;z-index:1}
+    .hero h1{font-size:clamp(34px, 6.2vw, 90px); line-height:.95; margin:0; text-transform:uppercase}
+
+    /* Footer */
+    footer.section{background:#f8fafc}
+    footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .footer-legal{font-size:13px;opacity:.8}
+    .socials{display:flex;gap:10px}
+    .social-btn{width:40px;height:40px;border-radius:50%;background:var(--brand);display:inline-flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-weight:700}
+    .social-btn:hover{filter:brightness(1.08)}
+    .social-btn img.social-icon{width:22px;height:22px;display:block;object-fit:contain}
+    .social-btn.yt img.social-icon{transform:scale(1.28)}
+    @media (max-width:680px){footer .wrap{justify-content:center;text-align:center}.socials{width:100%;justify-content:center}.footer-legal{width:100%}}
+
+    /* Petites utilités */
+    .muted{opacity:.8}
+    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    .hr{height:1px;background:#e5e7eb;margin:6px 0 0}
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap">
+      <a class="brand" href="index.html"><img class="brand-logo" src="atp/logo.png" alt="Accueil ATP"></a>
+      <nav class="desktop-nav" aria-label="Navigation principale">
+        <a href="index.html">Accueil</a>
+        <a href="equipeatp.html">L'ÉQUIPE ATP</a>
+        <a href="avis.html">Avis</a>
+        <a href="planning.html">Planning</a>
+        <a href="salle.html">Salle</a>
+        <a href="tarifs.html">Tarifs</a>
+      </nav>
+      <button id="menuBtn" class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu"><span class="bar" aria-hidden="true"></span></button>
+    </div>
+  </header>
+
+  <nav id="mobileMenu" class="mobile-menu" aria-hidden="true">
+    <a href="index.html">Accueil</a>
+    <a href="equipeatp.html">L'ÉQUIPE ATP</a>
+    <a href="avis.html">Avis</a>
+    <a href="planning.html">Planning</a>
+    <a href="salle.html">Salle</a>
+    <a href="tarifs.html">Tarifs</a>
+  </nav>
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero"><h1>Mentions légales</h1></section>
+
+    <!-- CONTENU LÉGAL -->
+    <section class="section" id="mentions">
+      <div class="wrap legal">
+        <div>
+          <h3>1) Éditeur du site</h3>
+          <p><strong>ATP Tarbes</strong> — <span class="mono">ATP Tarbes, SARL</span><br>
+          Adresse : <span class="mono">CENTRE DE GROS ZONE KENNEDY, RUE YOURI GAGARINE, 65000 TARBES</span><br>
+          E‑mail : <a href="mailto:atppreparationphysique@gmail.com">atppreparationphysique@gmail.com</a><br>
+          Directeur de la publication : <span class="mono">Cogordan Louis &amp; Loumagne Mathieu (Co‑gérants)</span></p>
+          <p class="muted">SIREN : <span class="mono">840 001 184</span> — SIRET (siège) : <span class="mono">840 001 184 00018</span> — APE/NAF : <span class="mono">—</span> — TVA intracom : <span class="mono">FR18840001184</span> — Capital social : <span class="mono">3 000,00 €</span><br>
+          RCS : <span class="mono">840 001 184 R.C.S. Tarbes</span> — Inscrit au RCS de Tarbes le <span class="mono">11/06/2018</span> — Inscrit au RNE le <span class="mono">11/06/2018</span></p>
+        </div>
+
+        <div class="hr"></div>
+
+
+        <div>
+          <h3>2) Hébergeur</h3>
+          <p><strong>Gestion de l'hébergement :</strong> <span class="mono">Caza Comm</span> (prestataire technique pour ATP Tarbes)</p>
+          <p><strong>Infrastructure d'hébergement :</strong><br>
+          <span class="mono">GitHub, Inc.</span><br>
+          Adresse : <span class="mono">88 Colin P. Kelly Jr. St, San Francisco, CA 94107, USA</span><br>
+          Site : <a href="https://pages.github.com/" rel="noopener nofollow" target="_blank">pages.github.com</a> — Tél. : <span class="mono">+1 415 448 6673</span></p>
+        </div>
+
+        <div class="hr"></div>
+
+
+
+        <div>
+          <h3>3) Propriété intellectuelle</h3>
+          <p>Le présent site et l’ensemble de ses contenus (textes, images, vidéos, logos, graphismes, code, etc.) sont protégés par le droit d’auteur. Toute reproduction, représentation, modification ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
+        </div>
+
+        <div class="hr"></div>
+
+        <div>
+          <h3>4) Données personnelles (RGPD)</h3>
+          <p>Les informations collectées via les formulaires (prise de rendez‑vous, contact) sont traitées par ATP Tarbes afin de répondre à vos demandes et organiser nos services. Base légale : exécution de mesures précontractuelles/intérêt légitime.</p>
+          <ul>
+            <li><strong>Données traitées</strong> : identité, coordonnées, créneau souhaité, message libre.</li>
+            <li><strong>Durée de conservation</strong> : le temps nécessaire au traitement puis archivage légal.</li>
+            <li><strong>Destinataires</strong> : personnel d’ATP et prestataires techniques strictement nécessaires.</li>
+            <li><strong>Vos droits</strong> : accès, rectification, effacement, opposition, limitation et portabilité. Pour exercer : <a href="mailto:atppreparationphysique@gmail.com">atppreparationphysique@gmail.com</a>.</li>
+            <li><strong>Réclamation</strong> : vous pouvez saisir la CNIL (cnil.fr) si besoin.</li>
+          </ul>
+          <p class="muted">Délégué à la protection des données (si applicable) : <span class="mono">—</span></p>
+        </div>
+
+        <div class="hr"></div>
+
+        <div>
+          <h3>5) Cookies & traceurs</h3>
+          <p>Par défaut, nous n’installons que des cookies strictement nécessaires au fonctionnement du site. Si des mesures d’audience (ex. Google Analytics) sont ajoutées, un bandeau de consentement sera affiché et vous pourrez accepter ou refuser les cookies non essentiels.</p>
+        </div>
+
+        <div class="hr"></div>
+
+        <div>
+          <h3>6) Liens externes</h3>
+          <p>Le site peut contenir des liens vers des sites tiers. ATP Tarbes n’exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leurs contenus ou pratiques.</p>
+        </div>
+
+        <div class="hr"></div>
+
+        <div>
+          <h3>7) Responsabilité</h3>
+          <p>Malgré nos soins, des erreurs peuvent subsister. N’hésitez pas à nous signaler tout contenu inexact ou obsolète. L’utilisation du site se fait sous votre seule responsabilité.</p>
+        </div>
+
+        <div class="hr"></div>
+
+        <div>
+          <h3>8) Médiation de la consommation</h3>
+          <p>Conformément à l’article L.612‑1 du Code de la consommation, vous pouvez recourir gratuitement à un médiateur de la consommation en cas de litige. <strong>Organisme en cours de désignation</strong> — les coordonnées seront ajoutées ici dès nomination.</p>
+        </div>
+
+        <div class="hr"></div>
+
+
+        <div>
+          <h3>9) Droit applicable & tribunal compétent</h3>
+          <p>Le présent site est soumis au droit français. En cas de litige et à défaut d’accord amiable, les tribunaux du ressort de <span class="mono">Tarbes</span> seront compétents.</p>
+        </div>
+
+        <div class="hr"></div>
+
+        <div>
+          <h3>10) Crédits</h3>
+          <p>Photographies, vidéos et textes : ATP Tarbes — ou titulaires des droits lorsque mentionnés. Design & développement : <span class="mono">Caza Comm</span>.</p>
+          <p class="muted">Dernière mise à jour : <span class="mono">26/09/2025</span></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="sep-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="var(--brand)" d="M0,90 C240,0 1200,0 1440,90 L1440,90 L0,90 Z"/></svg>
+    </div>
+  </main>
+
+  <footer class="section">
+    <div class="wrap">
+      <div class="footer-legal"><small>© 2025 ATP Tarbes — CENTRE DE GROS ZONE KENNEDY, RUE YOURI GAGARINE, 65000 TARBES — <a href="mentions.html" aria-current="page">Mentions légales</a></small></div>
+      <div class="socials">
+        <a class="social-btn" href="https://www.instagram.com/atpprepaphysique?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram" target="_blank" rel="noopener">
+          <img class="social-icon" src="atp/IG.png" alt="Instagram">
+        </a>
+        <a class="social-btn" href="https://www.facebook.com/profile.php?id=100089940827994" aria-label="Facebook" target="_blank" rel="noopener">
+          <img class="social-icon" src="atp/FB.png" alt="Facebook">
+        </a>
+        <a class="social-btn yt" href="https://www.youtube.com/channel/UC9avJ7nTcTF31O6JDmZHenQ" aria-label="YouTube" target="_blank" rel="noopener">
+          <img class="social-icon" src="atp/YT.webp" alt="YouTube">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const body=document.body;const btn=document.getElementById('menuBtn');const menu=document.getElementById('mobileMenu');const backdrop=document.getElementById('backdrop');
+    const openMenu=()=>{body.classList.add('menu-open');btn.setAttribute('aria-expanded','true');btn.setAttribute('aria-label','Fermer le menu');menu.setAttribute('aria-hidden','false');backdrop.hidden=false};
+    const closeMenu=()=>{body.classList.remove('menu-open');btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Ouvrir le menu');menu.setAttribute('aria-hidden','true');backdrop.hidden=true};
+    btn.addEventListener('click',()=>{body.classList.contains('menu-open')?closeMenu():openMenu()});
+    backdrop.addEventListener('click',closeMenu);menu.addEventListener('click',e=>{if(e.target.tagName==='A') closeMenu()});document.addEventListener('keydown',e=>{if(e.key==='Escape') closeMenu()});
+  </script>
+</body>
+</html>
