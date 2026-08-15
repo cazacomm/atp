@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog ATP Tarbes</title>
+    <link>https://atptarbes.fr/blog/</link>
+    <description>Conseils de coachs diplômés sur la préparation physique, l'entraînement fonctionnel et le sport à Tarbes et dans les Hautes-Pyrénées.</description>
+    <language>fr-FR</language>
+    <lastBuildDate>Sat, 15 Aug 2026 09:00:00 +0200</lastBuildDate>
+    <atom:link href="https://atptarbes.fr/rss.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>Préparation physique pour le trail et la montagne dans les Hautes-Pyrénées</title>
+      <link>https://atptarbes.fr/blog/preparation-physique-trail-hautes-pyrenees/</link>
+      <guid isPermaLink="true">https://atptarbes.fr/blog/preparation-physique-trail-hautes-pyrenees/</guid>
+      <pubDate>Sat, 15 Aug 2026 09:00:00 +0200</pubDate>
+      <category>Préparation physique</category>
+      <description>Dénivelé, descentes longues et terrain technique : comment structurer sa préparation physique en salle à Tarbes pour mieux courir en montagne.</description>
+    </item>
+
+  </channel>
+</rss>

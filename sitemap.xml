@@ -25,6 +25,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://atptarbes.fr/blog/</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://atptarbes.fr/blog/preparation-physique-trail-hautes-pyrenees/</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atptarbes.fr/equipeatp.html</loc>
     <lastmod>2026-04-13</lastmod>
     <changefreq>monthly</changefreq>
