@@ -1,0 +1,60 @@
+{
+  "site_name": "ATP Tarbes (Athletic Training Performance)",
+  "site_slug": "atp",
+  "site_url": "https://atptarbes.fr",
+  "sector": "coaching sportif, préparation physique, entraînement athlétique",
+  "location": "Tarbes, Hautes-Pyrénées",
+  "geo_keywords": [
+    "Tarbes",
+    "Hautes-Pyrénées",
+    "65000",
+    "Occitanie",
+    "Séméac",
+    "Aureilhan",
+    "Bordères-sur-l'Échez",
+    "Juillan",
+    "Vic-en-Bigorre",
+    "Bagnères-de-Bigorre",
+    "Lannemezan",
+    "Lourdes",
+    "Pau",
+    "Auch",
+    "salle de sport Tarbes",
+    "préparation physique Tarbes",
+    "coach sportif Tarbes",
+    "entraînement fonctionnel Tarbes"
+  ],
+  "tone": "expert-conseil, factuel, chaleureux, sans jargon inutile",
+  "author": "l'équipe ATP Tarbes",
+  "target_word_count": 1300,
+  "faq_questions_count": 5,
+  "language": "fr",
+
+  "openai_model": "gpt-4o-mini",
+  "openai_temperature": 0.7,
+
+  "template_article_slug": "preparation-physique-trail-hautes-pyrenees",
+  "blog_dir": "blog",
+  "workflow_file": "BLOG_WORKFLOW.md",
+  "sitemap_file": "sitemap.xml",
+  "rss_file": "rss.xml",
+
+  "cover_images": [
+    "/atp/cours-atpclass.jpg",
+    "/atp/cours-cardio.jpg",
+    "/atp/cours-gainage.jpg",
+    "/atp/cours-barbell.jpg",
+    "/atp/cours-libre-acces.jpg",
+    "/atp/groupe.jpg",
+    "/atp/accueil.jpg",
+    "/atp/cours-running.jpg"
+  ],
+
+  "editorial_bans": [
+    "prix, tarifs, promotions chiffrées",
+    "statistiques et pourcentages non sourcés",
+    "noms d'adhérents ou de clients",
+    "dates de création, ancienneté, palmarès",
+    "affirmations médicales ou réglementaires présentées comme des faits"
+  ]
+}
