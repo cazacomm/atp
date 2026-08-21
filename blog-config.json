@@ -1,8 +1,7 @@
 {
-  "site_name": "ATP Tarbes (Athletic Training Performance)",
-  "site_slug": "atp",
+  "site_name": "ATP Tarbes",
   "site_url": "https://atptarbes.fr",
-  "sector": "coaching sportif, préparation physique, entraînement athlétique",
+  "sector": "coaching sportif, préparation physique et entraînement athlétique",
   "location": "Tarbes, Hautes-Pyrénées",
   "geo_keywords": [
     "Tarbes",
@@ -14,11 +13,13 @@
     "Bordères-sur-l'Échez",
     "Juillan",
     "Vic-en-Bigorre",
+    "Barbazan-Debat",
     "Bagnères-de-Bigorre",
     "Lannemezan",
     "Lourdes",
     "Pau",
     "Auch",
+    "bassin tarbais",
     "salle de sport Tarbes",
     "préparation physique Tarbes",
     "coach sportif Tarbes",
@@ -29,32 +30,28 @@
   "target_word_count": 1300,
   "faq_questions_count": 5,
   "language": "fr",
-
-  "openai_model": "gpt-4o-mini",
-  "openai_temperature": 0.7,
-
-  "template_article_slug": "preparation-physique-trail-hautes-pyrenees",
-  "blog_dir": "blog",
-  "workflow_file": "BLOG_WORKFLOW.md",
-  "sitemap_file": "sitemap.xml",
-  "rss_file": "rss.xml",
-
-  "cover_images": [
-    "/atp/cours-atpclass.jpg",
-    "/atp/cours-cardio.jpg",
-    "/atp/cours-gainage.jpg",
-    "/atp/cours-barbell.jpg",
-    "/atp/cours-libre-acces.jpg",
-    "/atp/groupe.jpg",
-    "/atp/accueil.jpg",
-    "/atp/cours-running.jpg"
+  "model": "gpt-4o",
+  "temperature": 0.7,
+  "topic_marker_prefix": "atp-topic",
+  "og_image": "/atp/cours-atpclass.jpg",
+  "logo_path": "/logo-400.png",
+  "default_article_section": "Préparation physique",
+  "internal_link_targets": [
+    "/planning.html",
+    "/tarifs.html",
+    "/equipeatp.html"
   ],
-
-  "editorial_bans": [
-    "prix, tarifs, promotions chiffrées",
-    "statistiques et pourcentages non sourcés",
-    "noms d'adhérents ou de clients",
-    "dates de création, ancienneté, palmarès",
-    "affirmations médicales ou réglementaires présentées comme des faits"
+  "reference_article_slug": "preparation-physique-trail-hautes-pyrenees",
+  "facts": [
+    "ATP Tarbes (Athletic Training Performance) est une salle de sport et de préparation physique située 1 rue Youri Gagarine, centre de gros zone Kennedy, 65000 Tarbes.",
+    "Téléphone : 06 87 57 68 69. E-mail : atppreparationphysique@gmail.com. Site : https://atptarbes.fr/",
+    "L'encadrement est assuré par Mathieu et Louis, coachs diplômés d'un Master STAPS.",
+    "ATP privilégie l'entraînement fonctionnel plutôt que la musculation esthétique ou le CrossFit. Devise de la salle : « Le moteur, avant la carrosserie ».",
+    "Cours et formules proposés : ATP Class, Team Running, Team Cardio, Barbell Club, Gainage, Suivi personnalisé et accès libre.",
+    "Autres activités encadrées : préparation physique, coaching personnalisé, haltérophilie, cardio, HIIT, running et endurance, santé et prévention des blessures, préparation Hyrox et ATHX Games.",
+    "La salle dispose d'un parking gratuit devant l'entrée, d'un accès PMR et de vestiaires équipés de douches.",
+    "Le public accueilli va du débutant au sportif confirmé, sans niveau minimum requis.",
+    "Zone desservie : Tarbes et son agglomération (Séméac, Aureilhan, Bordères-sur-l'Échez, Juillan, Barbazan-Debat), ainsi que Vic-en-Bigorre, Bagnères-de-Bigorre, Lannemezan, Lourdes, Pau et Auch.",
+    "Les horaires des cours figurent sur la page /planning.html et les formules d'abonnement sur la page /tarifs.html : ne jamais citer d'horaire ni de tarif chiffré dans un article."
   ]
 }
