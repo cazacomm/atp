@@ -26,7 +26,7 @@
   </url>
   <url>
     <loc>https://atptarbes.fr/blog/</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -63,6 +63,12 @@
   <url>
     <loc>https://atptarbes.fr/blog/preparation-physique-ou-musculation-difference/</loc>
     <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atptarbes.fr/blog/preparation-hyrox-tarbes/</loc>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
