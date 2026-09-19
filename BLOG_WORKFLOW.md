@@ -158,9 +158,13 @@ Toute modification d'une de ces valeurs doit être répercutée dans :
 
 ---
 
-## 6. 12 sujets d'articles suggérés
+## 6. Sujets d'articles suggérés
 
 Ordre indicatif de priorité (intention de recherche locale × facilité de rédaction).
+
+Cette liste est la réserve dans laquelle le script pioche chaque semaine. Quand il
+reste moins de huit sujets non traités, un lot est généré automatiquement et ajouté
+à la fin de ce tableau, au même format (titre en gras, slug sur la ligne suivante).
 
 1. **Reprendre le sport après 40 ans à Tarbes : par où commencer**
    `reprendre-le-sport-apres-40-ans-tarbes`

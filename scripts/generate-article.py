@@ -31,6 +31,12 @@ Options :
   --dry-run       n'écrit aucun fichier, affiche le résultat
   --mock          n'appelle pas l'API (contenu de démonstration)
   --rewrite SLUG  régénère un article existant et écrase son fichier
+  --topics-only   réapprovisionne la réserve de sujets et s'arrête là
+
+Réserve de sujets : avant chaque rédaction, le script compte les sujets non
+traités. S'il en reste moins de TOPIC_RESERVE_MIN, il en fait générer un lot et
+les ajoute à BLOG_WORKFLOW.md, dans un commit distinct. Le blog ne s'arrête donc
+plus quand la liste initiale est épuisée.
 """
 
 from __future__ import annotations
@@ -40,6 +46,7 @@ import datetime as dt
 import json
 import os
 import re
+import subprocess
 import sys
 import unicodedata
 from pathlib import Path
@@ -63,6 +70,16 @@ PROMPT_MIN_WORDS, PROMPT_MAX_WORDS = 1200, 1500
 
 # Nombre maximal d'appels OpenAI pour un article, rattrapages compris.
 MAX_CALLS = 3
+
+# Réserve de sujets. En dessous de TOPIC_RESERVE_MIN sujets non traités, le
+# script fait générer un lot de TOPIC_BATCH nouveaux sujets et les ajoute à
+# BLOG_WORKFLOW.md. Le seuil est volontairement haut : il laisse plusieurs
+# semaines de marge si un lot échoue, et le réapprovisionnement ne coûte qu'un
+# appel tous les TOPIC_BATCH articles.
+TOPIC_RESERVE_MIN = 8
+TOPIC_BATCH = 40
+TOPIC_MAX_CALLS = 2
+TOPICS_MODEL = "gpt-4o"
 
 MONTHS_FR = ["janvier", "février", "mars", "avril", "mai", "juin",
              "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
@@ -251,16 +268,30 @@ def topic_slug(topic: dict) -> str:
     return topic["declared_slug"] or slugify(topic["title"])
 
 
+def topic_is_pending(topic: dict, done_nums: set[int], slugs: set[str]) -> bool:
+    """Définition UNIQUE du « sujet non traité ».
+
+    Elle sert à la fois à compter la réserve et à choisir le sujet à rédiger :
+    deux définitions parallèles finiraient par diverger, et le script
+    réapprovisionnerait alors une réserve qu'il croit vide tout en publiant, ou
+    l'inverse.
+    """
+    if topic["num"] in done_nums:
+        return False
+    # Le dossier existe déjà : le sujet est considéré traité (idempotence).
+    return topic_slug(topic) not in slugs
+
+
+def pending_topics(topics: list[dict], done_nums: set[int],
+                   slugs: set[str]) -> list[dict]:
+    """Sujets restant à rédiger, dans l'ordre de la liste."""
+    return [t for t in topics if topic_is_pending(t, done_nums, slugs)]
+
+
 def pick_topic(topics: list[dict], done_nums: set[int], slugs: set[str]) -> dict | None:
     """Premier sujet non traité, dans l'ordre de la liste."""
-    for topic in topics:
-        if topic["num"] in done_nums:
-            continue
-        slug = topic_slug(topic)
-        if slug in slugs:
-            # Le dossier existe déjà : on considère le sujet traité (idempotence).
-            continue
-        topic["slug"] = slug
+    for topic in pending_topics(topics, done_nums, slugs):
+        topic["slug"] = topic_slug(topic)
         return topic
     return None
 
@@ -409,7 +440,8 @@ Réponds par le seul objet JSON."""
 
 
 def generate_content(cfg: dict, system: str, user: str,
-                     followup: list[dict] | None = None) -> dict:
+                     followup: list[dict] | None = None,
+                     model: str | None = None) -> dict:
     try:
         from openai import OpenAI
     except ImportError as exc:
@@ -420,9 +452,10 @@ def generate_content(cfg: dict, system: str, user: str,
         raise RuntimeError("Variable d'environnement OPENAI_API_KEY absente.")
 
     client = OpenAI()
-    log(f"Appel OpenAI (modèle {cfg['model']}, temperature {cfg['temperature']})…")
+    model = model or cfg["model"]
+    log(f"Appel OpenAI (modèle {model}, temperature {cfg['temperature']})…")
     response = client.chat.completions.create(
-        model=cfg["model"],
+        model=model,
         temperature=cfg["temperature"],
         max_tokens=9000,
         response_format={"type": "json_object"},
@@ -1041,6 +1074,263 @@ def update_llms(cfg: dict, topic: dict, meta: dict) -> str | None:
 
 
 # ─────────────────────────────────────────────────────────────
+# Réapprovisionnement de la réserve de sujets
+# ─────────────────────────────────────────────────────────────
+
+# Une entrée numérotée du tableau des sujets. Le motif se termine par [ \t]*$
+# et NON par \s*$ : \s avale le retour à la ligne, la réinsertion collerait
+# alors deux entrées sur la même ligne et casserait la liste markdown.
+TOPIC_ENTRY_RE = re.compile(r"^(\d+)\.[ \t]+\*\*(.+?)\*\*[ \t]*$", re.M)
+TOPIC_SLUG_LINE_RE = re.compile(r"\n([ \t]+)`([a-z0-9\-]+)`[ \t]*(?=\n|$)")
+TOPICS_HEADING_RE = re.compile(
+    r"^##[ \t]+\d+\.[ \t]+.*sujets d'articles suggérés.*$", re.M | re.I)
+
+
+def clean_line(text: str) -> str:
+    """Nettoie une ligne venue du modèle : plus de balisage, plus de numérotation,
+    plus de guillemets décoratifs, espaces normalisés."""
+    out = str(text).replace("\n", " ").replace("\r", " ")
+    out = re.sub(r"[*_`]+", "", out)                 # gras, italique, code
+    out = re.sub(r"^\s*\d+[.)]\s*", "", out)         # « 13. » en tête
+    out = re.sub(r"^\s*[-–—•]\s*", "", out)          # puce en tête
+    out = out.strip().strip('"“”').strip()
+    return " ".join(out.split())
+
+
+def dedupe_topics(candidates: list[dict], known_slugs: set[str]) -> list[dict]:
+    """Filtre les doublons. La déduplication se fait sur le SLUG, pas sur le
+    titre : c'est le slug qui est la clé d'idempotence (dossier de l'article,
+    URL, marqueur). Deux titres différents qui produisent le même slug
+    écriraient au même endroit."""
+    seen = set(known_slugs)
+    out: list[dict] = []
+    for topic in candidates:
+        slug = topic.get("slug", "")
+        if not slug or slug in seen:
+            continue
+        seen.add(slug)
+        out.append(topic)
+    return out
+
+
+def build_topics_prompt(cfg: dict, existing_titles: list[str]) -> tuple[str, str]:
+    """Prompt de génération de sujets. Le modèle reçoit la liste des sujets déjà
+    prévus ou publiés : c'est ce qui lui évite de reproposer les mêmes angles."""
+    system = f"""Tu es consultant SEO local et éditorial pour une entreprise française.
+Tu proposes des sujets d'articles de blog : concrets, actionnables, ancrés
+localement, avec une vraie intention de recherche derrière chacun.
+
+Tu réponds UNIQUEMENT par un objet JSON valide, sans bloc de code markdown :
+
+{{"topics": [{{"title": "titre du sujet", "slug": "slug-en-minuscules"}}]}}
+
+RÈGLES
+- Exactement {TOPIC_BATCH} sujets.
+- Titre : une question ou une promesse claire, 6 à 14 mots, en français, sans
+  nom de marque et sans guillemets. Il doit répondre à une question que se pose
+  vraiment un habitant de la zone.
+- Slug : minuscules, sans accent, mots séparés par des tirets, 3 à 7 mots,
+  dérivé du titre. Deux sujets ne peuvent pas partager le même slug.
+- Varie les angles : guides pratiques, erreurs fréquentes, comparaisons,
+  saisonnalité, publics particuliers, questions de débutants, aspects
+  matériels ou organisationnels.
+- Chaque sujet doit pouvoir donner un article de 1200 à 1500 mots utile, sans
+  inventer de prix, de statistique, de date ni de réglementation.
+- Ne reprends aucun sujet déjà traité ou déjà prévu (liste fournie), ni une
+  simple reformulation de ceux-ci."""
+
+    listing = "\n".join(f"- {t}" for t in existing_titles) or "- (aucun)"
+    user = f"""Entreprise : {cfg['site_name']} — {cfg['sector']}.
+Zone desservie : {cfg['location']}.
+Ancrages géographiques utilisables : {', '.join(cfg['geo_keywords'])}.
+Ton du blog : {cfg['tone']}. Langue : {cfg['language']}.
+
+SUJETS DÉJÀ TRAITÉS OU DÉJÀ PRÉVUS — à ne pas reproposer :
+{listing}
+
+Propose {TOPIC_BATCH} nouveaux sujets. Réponds par le seul objet JSON."""
+    return system, user
+
+
+def parse_topics_response(data: dict) -> list[dict]:
+    """Normalise la réponse du modèle en [{title, slug}]. Un slug absent ou
+    malformé est recalculé depuis le titre : le slug reste toujours valide."""
+    raw = data.get("topics") if isinstance(data, dict) else None
+    if not isinstance(raw, list):
+        raise ValueError("réponse sans tableau « topics »")
+
+    out: list[dict] = []
+    for item in raw:
+        if isinstance(item, str):
+            title, slug = clean_line(item), ""
+        elif isinstance(item, dict):
+            title = clean_line(item.get("title") or item.get("titre") or "")
+            slug = clean_line(item.get("slug") or "")
+        else:
+            continue
+        if not title or len(title) < 12:
+            continue
+        slug = re.sub(r"[^a-z0-9-]", "", strip_accents(slug.lower()).replace(" ", "-"))
+        slug = re.sub(r"-{2,}", "-", slug).strip("-")
+        if not slug or len(slug) < 6:
+            slug = slugify(title)
+        out.append({"title": title, "slug": slug})
+    if not out:
+        raise ValueError("aucun sujet exploitable dans la réponse")
+    return out
+
+
+def mock_topics(cfg: dict, count: int, start: int = 1) -> list[dict]:
+    """Sujets de démonstration (--mock) : aucun appel réseau."""
+    ville = cfg["location"].split(",")[0].strip()
+    out = []
+    for i in range(start, start + count):
+        title = f"Sujet de démonstration n°{i} pour s'entraîner à {ville}"
+        out.append({"title": title, "slug": slugify(title)})
+    return out
+
+
+def generate_topics(cfg: dict, existing_titles: list[str], known_slugs: set[str],
+                    mock: bool = False) -> list[dict]:
+    """Fait générer un lot de sujets et le dédoublonne. Plafond : TOPIC_MAX_CALLS
+    appels — un second essai sert quand le premier lot est trop dédoublonné."""
+    if mock:
+        return dedupe_topics(mock_topics(cfg, TOPIC_BATCH), known_slugs)
+
+    system, user = build_topics_prompt(cfg, existing_titles)
+    collected: list[dict] = []
+    last_error: Exception | None = None
+
+    for attempt in range(1, TOPIC_MAX_CALLS + 1):
+        try:
+            data = generate_content(cfg, system, user, model=TOPICS_MODEL)
+            fresh = dedupe_topics(parse_topics_response(data),
+                                  known_slugs | {t["slug"] for t in collected})
+            collected.extend(fresh)
+            log(f"Lot {attempt}/{TOPIC_MAX_CALLS} : {len(fresh)} sujet(s) retenu(s) "
+                f"après déduplication (total {len(collected)}).")
+        except Exception as exc:                      # noqa: BLE001
+            last_error = exc
+            fail(f"Lot de sujets {attempt}/{TOPIC_MAX_CALLS} inexploitable : "
+                 f"{type(exc).__name__} : {exc}")
+        if len(collected) >= TOPIC_BATCH:
+            break
+
+    if not collected:
+        raise RuntimeError(
+            f"aucun sujet exploitable après {TOPIC_MAX_CALLS} appel(s)"
+            + (f" — {type(last_error).__name__} : {last_error}" if last_error else ""))
+    return collected[:TOPIC_BATCH]
+
+
+def append_topics_to_workflow(new_topics: list[dict]) -> int:
+    """Ajoute les sujets à la fin du tableau de BLOG_WORKFLOW.md.
+
+    Le format d'écriture est déduit du fichier lui-même : ce dépôt déclare le
+    titre en gras sur la ligne numérotée et le slug entre accents graves sur la
+    ligne suivante, indenté sous le titre. Un dépôt qui n'aurait pas de slug
+    explicite se verrait ajouter des entrées au même format, sans slug.
+    """
+    text = WORKFLOW_PATH.read_text(encoding="utf-8")
+    heading = TOPICS_HEADING_RE.search(text)
+    if not heading:
+        raise ValueError("Section des sujets suggérés introuvable dans BLOG_WORKFLOW.md")
+
+    start = heading.end()
+    nxt = re.search(r"^##[ \t]", text[start:], re.M)
+    end = start + (nxt.start() if nxt else len(text) - start)
+    section = text[start:end]
+
+    entries = list(TOPIC_ENTRY_RE.finditer(section))
+    if not entries:
+        raise ValueError("Aucune entrée numérotée dans la section des sujets")
+
+    last = entries[-1]
+    next_num = int(last.group(1)) + 1
+
+    # Fin de la dernière entrée : sa ligne de slug si le format local en a une.
+    pos = last.end()
+    slug_line = TOPIC_SLUG_LINE_RE.match(section, pos)
+    has_slug_column = slug_line is not None
+    if slug_line:
+        pos = slug_line.end()
+
+    lines = []
+    for offset, topic in enumerate(new_topics):
+        num = next_num + offset
+        lines.append(f"\n{num}. **{topic['title']}**")
+        if has_slug_column:
+            lines.append(f"\n{' ' * len(f'{num}. ')}`{topic['slug']}`")
+
+    section = section[:pos] + "".join(lines) + section[pos:]
+    WORKFLOW_PATH.write_text(text[:start] + section + text[end:], encoding="utf-8")
+    return len(new_topics)
+
+
+def git_commit_file(path: Path, message: str) -> bool:
+    """Commit d'un seul fichier. Renvoie False sans lever si rien n'a changé ou
+    si git refuse : le réapprovisionnement ne doit jamais faire tomber le run."""
+    try:
+        rel = path.relative_to(ROOT).as_posix()
+        subprocess.run(["git", "add", "--", rel], cwd=ROOT, check=True,
+                       capture_output=True, text=True)
+        staged = subprocess.run(["git", "diff", "--cached", "--quiet", "--", rel],
+                                cwd=ROOT, capture_output=True, text=True)
+        if staged.returncode == 0:
+            log("Aucun changement à committer pour les sujets.")
+            return False
+        subprocess.run(["git", "commit", "-m", message, "--", rel],
+                       cwd=ROOT, check=True, capture_output=True, text=True)
+        log(f"Commit : {message}")
+        return True
+    except (subprocess.CalledProcessError, ValueError, OSError) as exc:
+        detail = getattr(exc, "stderr", "") or str(exc)
+        fail(f"Commit des sujets impossible : {detail.strip()[:300]}")
+        return False
+
+
+def replenish_topics(cfg: dict, topics: list[dict], done_nums: set[int],
+                     slugs: set[str], mock: bool = False,
+                     dry_run: bool = False) -> dict:
+    """Complète la réserve si elle est basse. Renvoie un récapitulatif.
+
+    En mode --topics-only, une erreur remonte à l'appelant. En mode normal,
+    l'appelant l'attrape : un lot de sujets raté ne doit jamais empêcher la
+    publication de l'article de la semaine.
+    """
+    reserve = len(pending_topics(topics, done_nums, slugs))
+    log(f"Réserve de sujets non traités : {reserve} (seuil {TOPIC_RESERVE_MIN}).")
+    if reserve >= TOPIC_RESERVE_MIN:
+        log("Réserve suffisante : aucun appel de génération de sujets.")
+        return {"added": 0, "reserve_before": reserve, "reserve_after": reserve,
+                "committed": False}
+
+    known_slugs = set(slugs) | {topic_slug(t) for t in topics}
+    existing_titles = [t["title"] for t in topics]
+    log(f"Réserve basse : génération de {TOPIC_BATCH} sujets "
+        f"({'mock' if mock else TOPICS_MODEL}).")
+
+    fresh = generate_topics(cfg, existing_titles, known_slugs, mock=mock)
+    if not fresh:
+        raise RuntimeError("le lot de sujets est vide après déduplication")
+
+    if dry_run:
+        log(f"DRY-RUN : {len(fresh)} sujet(s) seraient ajoutés à "
+            f"{WORKFLOW_PATH.name}, aucun fichier écrit.")
+        for topic in fresh[:5]:
+            log(f"    · {topic['title']}  ({topic['slug']})")
+        return {"added": 0, "reserve_before": reserve,
+                "reserve_after": reserve, "committed": False, "proposed": len(fresh)}
+
+    added = append_topics_to_workflow(fresh)
+    log(f"{added} sujet(s) ajouté(s) à {WORKFLOW_PATH.name}.")
+    committed = git_commit_file(
+        WORKFLOW_PATH, f"chore(blog): {added} nouveaux sujets ({dt.date.today().isoformat()})")
+    return {"added": added, "reserve_before": reserve,
+            "reserve_after": reserve + added, "committed": committed}
+
+
+# ─────────────────────────────────────────────────────────────
 # Point d'entrée
 # ─────────────────────────────────────────────────────────────
 
@@ -1091,7 +1381,14 @@ def main() -> int:
                         help="n'appelle pas l'API OpenAI (contenu de démonstration)")
     parser.add_argument("--rewrite", metavar="SLUG",
                         help="réécrit un article existant et écrase son fichier")
+    parser.add_argument("--topics-only", action="store_true",
+                        help="réapprovisionne la réserve de sujets et s'arrête là")
     args = parser.parse_args()
+
+    if args.topics_only and args.rewrite:
+        fail("--topics-only et --rewrite sont incompatibles : le premier ne "
+             "produit aucun article, le second en réécrit un.")
+        return EXIT_ERROR
 
     if args.dry_run:
         log("Mode DRY-RUN : aucun fichier ne sera écrit.")
@@ -1114,6 +1411,30 @@ def main() -> int:
         done, slugs = scan_blog(cfg["topic_marker_prefix"])
         log(f"Articles déjà en ligne : {len(slugs)} — sujets marqués traités : "
             f"{sorted(done) if done else 'aucun'}")
+
+        # ── Réserve de sujets ──
+        if args.topics_only:
+            # Mode dédié : l'erreur remonte, c'est le seul travail du run.
+            result = replenish_topics(cfg, topics, done, slugs,
+                                      mock=args.mock, dry_run=args.dry_run)
+            log(f"Terminé — {result['added']} sujet(s) ajouté(s), "
+                f"réserve : {result['reserve_after']}.")
+            return EXIT_OK
+
+        if not args.rewrite:
+            # Mode normal : le réapprovisionnement ne doit JAMAIS faire échouer
+            # le run. En cas de pépin, on journalise et on rédige avec la
+            # réserve existante.
+            try:
+                result = replenish_topics(cfg, topics, done, slugs,
+                                          mock=args.mock, dry_run=args.dry_run)
+                if result["added"]:
+                    topics = parse_topics(WORKFLOW_PATH.read_text(encoding="utf-8"))
+                    log(f"{len(topics)} sujets désormais listés dans "
+                        f"{WORKFLOW_PATH.name}.")
+            except Exception as exc:                  # noqa: BLE001
+                fail(f"Réapprovisionnement ignoré ({type(exc).__name__} : {exc}) "
+                     "— la rédaction continue avec la réserve existante.")
 
         if args.rewrite:
             # Réécriture : on retrouve le sujet par le marqueur du fichier existant.

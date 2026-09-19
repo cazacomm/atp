@@ -31,6 +31,7 @@ export OPENAI_API_KEY="sk-..."
 python3 scripts/generate-article.py --dry-run   # simulation, aucun fichier touché
 python3 scripts/generate-article.py             # génère et écrit (à committer soi-même)
 python3 scripts/generate-article.py --mock      # teste la tuyauterie sans appeler l'API
+python3 scripts/generate-article.py --topics-only   # réapprovisionne la réserve, sans rédiger
 ```
 
 `--mock` ne produit **aucun contenu éditorial réel** : il remplit le gabarit avec un texte
@@ -63,8 +64,8 @@ mises à jour de fichiers fonctionnent.
    des coachs et de leur diplôme, liste des cours, équipements. Tout le reste
    doit être reformulé pour s'en passer.
 
-2. Extrait de `BLOG_WORKFLOW.md` les 12 sujets suggérés **et** les règles éditoriales,
-   qui sont injectées telles quelles dans le prompt.
+2. Extrait de `BLOG_WORKFLOW.md` la liste des sujets suggérés **et** les règles
+   éditoriales, qui sont injectées telles quelles dans le prompt.
 
    *Convention locale :* dans ce dépôt, le titre du sujet est en gras sur la ligne
    numérotée et **le slug figure entre accents graves sur la ligne suivante**.
@@ -181,6 +182,41 @@ Disponible aussi depuis Actions : champ **rewrite** du `workflow_dispatch`.
 > à la main et sert de gabarit : il ne porte pas de marqueur et ne peut donc pas
 > être réécrit par cette commande. C'est voulu.
 
+## 4 ter. Réserve de sujets (réapprovisionnement automatique)
+
+Avant chaque rédaction, le script compte les **sujets non traités** de
+`BLOG_WORKFLOW.md`. S'il en reste **moins de 8** (`TOPIC_RESERVE_MIN`), il fait
+générer un lot de **40 sujets** (`TOPIC_BATCH`, modèle `gpt-4o`, au plus
+2 appels) ancrés sur `sector`, `location` et `geo_keywords`, puis les ajoute à la
+fin du tableau et les commite **à part**. Le blog ne s'arrête donc plus quand la
+liste initiale est épuisée.
+
+Points de conception :
+
+- **Une seule définition du « sujet non traité »** (`topic_is_pending()`), utilisée
+  à la fois pour compter la réserve et pour choisir le sujet à rédiger. Deux
+  définitions parallèles finiraient par diverger.
+- **Déduplication sur le slug**, pas sur le titre : le slug est la clé
+  d'idempotence (dossier, URL, marqueur). Deux titres différents produisant le
+  même slug écriraient au même endroit. La liste des sujets déjà prévus ou
+  publiés est envoyée au modèle pour qu'il évite les redites en amont.
+- **Format d'écriture déduit du fichier** : ce dépôt met le titre en gras sur la
+  ligne numérotée et le slug indenté sur la ligne suivante ; l'ajout suit ce
+  format, avec une numérotation continue, et s'insère à la fin du tableau (pas
+  après la prose qui le suit).
+- **Jamais bloquant en mode normal** : si le réapprovisionnement échoue,
+  l'exception est journalisée (`Réapprovisionnement ignoré …`) et la rédaction
+  continue avec la réserve existante. En `--topics-only`, elle remonte et le run
+  sort en code 1.
+- **Sujets poussés avant la rédaction** : le workflow commite et pousse les
+  nouveaux sujets *avant* de générer l'article. Si l'article échoue ensuite, le
+  lot est acquis et ne sera pas régénéré (donc pas repayé) la semaine suivante.
+- `--topics-only` et `--rewrite` sont **incompatibles** (erreur explicite, code 1).
+
+Étapes correspondantes du workflow, dans l'ordre : *Identité git* →
+*Réapprovisionnement* → *Push des nouveaux sujets* → *Génération de l'article*.
+Les deux premières sont ignorées en `dry_run` et en `rewrite`.
+
 ## 5. Idempotence
 
 - Le slug vient de `BLOG_WORKFLOW.md` (ou, à défaut, est déduit du titre de façon
@@ -209,10 +245,9 @@ d'appels (`[blog] N appels OpenAI au total pour cet article.`).
 
 ## 7. Ajouter des sujets
 
-La réserve de sujets est la section **« 12 sujets d'articles suggérés »** de
-[`BLOG_WORKFLOW.md`](../BLOG_WORKFLOW.md). Quand elle est épuisée, le workflow sort en
-code 78 chaque lundi sans rien casser. Il suffit d'ajouter des entrées au même
-format pour relancer la machine :
+La réserve de sujets est la section **« Sujets d'articles suggérés »** de
+[`BLOG_WORKFLOW.md`](../BLOG_WORKFLOW.md). Elle se réapprovisionne seule (voir §4 ter) ;
+l'ajout manuel reste possible, au même format :
 
 ```markdown
 13. **Titre du sujet**
