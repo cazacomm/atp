@@ -190,6 +190,86 @@ reste moins de huit sujets non traités, un lot est généré automatiquement et
     `sentrainer-malgre-la-chaleur-tarbes`
 12. **Coaching individuel ou cours collectif : comment choisir**
     `coaching-individuel-ou-cours-collectif`
+13. **Comment choisir un coach sportif à Tarbes ?**
+    `choisir-coach-sportif-tarbes`
+14. **Les meilleurs parcours de running autour de Tarbes**
+    `parcours-running-tarbes`
+15. **Comment s'entraîner efficacement pendant l'hiver à Tarbes ?**
+    `entrainement-hiver-tarbes`
+16. **Nutrition et sport : optimiser son alimentation à Tarbes**
+    `nutrition-sport-tarbes`
+17. **Les bienfaits du sport en plein air dans les Hautes-Pyrénées**
+    `sport-plein-air-hautes-pyrenees`
+18. **Comment débuter en crossfit à Tarbes ?**
+    `debuter-crossfit-tarbes`
+19. **Améliorer sa souplesse : exercices à faire chez soi à Tarbes**
+    `ameliorer-souplesse-tarbes`
+20. **Sport et grossesse : conseils pour s'entraîner à Tarbes**
+    `sport-grossesse-tarbes`
+21. **Les erreurs à éviter pour un bon renforcement musculaire**
+    `erreurs-renforcement-musculaire`
+22. **Préparer un trail en montagne depuis Tarbes**
+    `preparer-trail-montagne-tarbes`
+23. **Les bienfaits du HIIT pour les habitants de Tarbes**
+    `bienfaits-hiit-tarbes`
+24. **Comment reprendre le sport après une blessure à Tarbes ?**
+    `reprendre-sport-blessure-tarbes`
+25. **Les activités sportives incontournables à Tarbes et alentours**
+    `activites-sportives-tarbes-alentours`
+26. **Quel équipement choisir pour s'entraîner à la maison ?**
+    `equipement-entrainement-maison`
+27. **Sport pour seniors à Tarbes : quelles activités privilégier ?**
+    `sport-seniors-tarbes`
+28. **Meilleures techniques de récupération après l'effort**
+    `techniques-recuperation-effort`
+29. **Comment améliorer son endurance sans matériel ?**
+    `ameliorer-endurance-sans-materiel`
+30. **Les clubs sportifs à découvrir à Tarbes**
+    `clubs-sportifs-decouvrir-tarbes`
+31. **Comment motiver ses enfants au sport à Tarbes ?**
+    `motiver-enfants-sport-tarbes`
+32. **S'entraîner pour un semi-marathon autour de Tarbes**
+    `entrainement-semi-marathon-tarbes`
+33. **Les bienfaits du yoga pour les sportifs à Tarbes**
+    `bienfaits-yoga-sportifs-tarbes`
+34. **Comment éviter le surentraînement et ses risques ?**
+    `eviter-surentrainement-risques`
+35. **Les sports collectifs à pratiquer à Tarbes**
+    `sports-collectifs-pratiquer-tarbes`
+36. **Comment réaliser un échauffement efficace avant le sport ?**
+    `echauffement-efficace-avant-sport`
+37. **Quels sont les avantages du coaching sportif personnalisé ?**
+    `avantages-coaching-sportif-personnalise`
+38. **Sport et mental : gérer le stress par l'activité physique**
+    `sport-mental-gerer-stress`
+39. **Les meilleures salles de sport à Tarbes : notre sélection**
+    `meilleures-salles-sport-tarbes`
+40. **Comment intégrer le sport dans un emploi du temps chargé ?**
+    `integrer-sport-emploi-temps`
+41. **Les sports aquatiques à pratiquer près de Tarbes**
+    `sports-aquatiques-pres-tarbes`
+42. **Quels sports pour améliorer sa condition cardiovasculaire ?**
+    `sports-ameliorer-condition-cardio`
+43. **S'entraîner en duo : avantages et conseils à Tarbes**
+    `entrainement-duo-conseils-tarbes`
+44. **Les meilleures routines d'étirement après le sport**
+    `routines-etirement-apres-sport`
+45. **Comment choisir des chaussures de sport adaptées ?**
+    `choisir-chaussures-sport-adaptees`
+46. **Les sports de raquette à découvrir à Tarbes**
+    `sports-raquette-decouvrir-tarbes`
+47. **Comment évaluer sa progression sportive efficacement ?**
+    `evaluer-progression-sportive-efficacement`
+48. **Les bienfaits de l'entraînement en altitude dans les Pyrénées**
+    `entrainement-altitude-pyrenees`
+49. **Comment allier sport et vie sociale à Tarbes ?**
+    `allier-sport-vie-sociale-tarbes`
+50. **Les défis sportifs populaires à relever dans les Hautes-Pyrénées**
+    `defis-sportifs-populaires-hautes-pyrenees`
+51. **S'entraîner en extérieur : conseils pour l'hiver à Tarbes**
+    `entrainement-exterieur-hiver-tarbes`
+52. **Pourquoi essayer l'escalade en salle à Tarbes ?**
+    `essayer-escalade-salle-tarbes`
 
 Pour chaque sujet : vérifier avant rédaction qu'il ne cannibalise pas un article
 déjà publié (même intention de recherche = fusionner plutôt que dupliquer).
