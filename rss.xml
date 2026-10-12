@@ -5,8 +5,17 @@
     <link>https://atptarbes.fr/blog/</link>
     <description>Conseils de coachs diplômés sur la préparation physique, l'entraînement fonctionnel et le sport à Tarbes et dans les Hautes-Pyrénées.</description>
     <language>fr-FR</language>
-    <lastBuildDate>Mon, 28 Sep 2026 09:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 09:00:00 +0200</lastBuildDate>
     <atom:link href="https://atptarbes.fr/rss.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>Préparer la saison de ski et raquettes</title>
+      <link>https://atptarbes.fr/blog/preparation-physique-ski-pyrenees/</link>
+      <guid isPermaLink="true">https://atptarbes.fr/blog/preparation-physique-ski-pyrenees/</guid>
+      <pubDate>Mon, 12 Oct 2026 09:00:00 +0200</pubDate>
+      <category>Préparation physique</category>
+      <description>Optimisez votre saison de ski et raquettes dans les Pyrénées avec nos conseils de préparation physique à Tarbes.</description>
+    </item>
 
     <item>
       <title>Les erreurs à éviter en débutant à la salle</title>
