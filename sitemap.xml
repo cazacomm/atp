@@ -26,7 +26,7 @@
   </url>
   <url>
     <loc>https://atptarbes.fr/blog/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -99,6 +99,12 @@
   <url>
     <loc>https://atptarbes.fr/blog/preparation-physique-ski-pyrenees/</loc>
     <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atptarbes.fr/blog/course-a-pied-eviter-blessures/</loc>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
