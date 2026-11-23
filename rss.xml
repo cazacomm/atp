@@ -5,8 +5,17 @@
     <link>https://atptarbes.fr/blog/</link>
     <description>Conseils de coachs diplômés sur la préparation physique, l'entraînement fonctionnel et le sport à Tarbes et dans les Hautes-Pyrénées.</description>
     <language>fr-FR</language>
-    <lastBuildDate>Mon, 16 Nov 2026 09:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 23 Nov 2026 09:00:00 +0200</lastBuildDate>
     <atom:link href="https://atptarbes.fr/rss.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>Découvrez les parcours de running à Tarbes</title>
+      <link>https://atptarbes.fr/blog/parcours-running-tarbes/</link>
+      <guid isPermaLink="true">https://atptarbes.fr/blog/parcours-running-tarbes/</guid>
+      <pubDate>Mon, 23 Nov 2026 09:00:00 +0200</pubDate>
+      <category>Préparation physique</category>
+      <description>Explorez les meilleurs parcours de running à Tarbes et ses environs, adaptés à tous les niveaux.</description>
+    </item>
 
     <item>
       <title>Trouver le coach sportif idéal à Tarbes</title>
